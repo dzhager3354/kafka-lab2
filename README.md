@@ -98,7 +98,7 @@
   
   Принимаемые параметры: `server`
 
-  Curl: ```curl --header "Content-Type:application/json" --request GET http://77.90.33.48:8080/playerdata/top?server=```
+  Curl: ```curl http://77.90.33.48:8080/playerdata/top?server=```
 
 - GET: /playerdata/global
   
@@ -106,7 +106,7 @@
   
   Принимаемые параметры: `нет`
 
-  Curl: ```curl --header "Content-Type:application/json" --request GET http://77.90.33.48:8080/playerdata/global```
+  Curl: ```curl http://77.90.33.48:8080/playerdata/global```
 
 - GET: /playerdata/total?server=
   
@@ -114,4 +114,4 @@
   
   Принимаемые параметры: `server`
 
-  Curl: ```curl --header "Content-Type:application/json" --request GET http://77.90.33.48:8080/playerdata/total?server=```
+  Curl: ```curl http://77.90.33.48:8080/playerdata/total?server=```
