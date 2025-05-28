@@ -1,0 +1,62 @@
+version: '3.9'
+
+services:
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.4
+    env_file:
+      - zookeeper.env
+    networks:
+      - lab_net
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.4
+    depends_on:
+      - zookeeper
+    env_file:
+      - kafka.env
+    networks:
+      - lab_net
+    
+
+  db:
+    image: postgres
+    env_file:
+      - db.env
+    networks:
+      - lab_net
+    volumes:
+      - dbservice-volume:/var/lib/postgresql/data
+
+  api-service:
+    depends_on:
+      - kafka
+    build:
+      context: apiService/
+      dockerfile: Dockerfile
+    env_file:
+      - app.env
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    networks:
+      - lab_net
+
+  back-service:
+    depends_on:
+      - kafka
+      - db
+    build:
+      context: backService/
+      dockerfile: Dockerfile
+    env_file:
+      - db.env
+      - app.env
+    networks:
+      - lab_net
+
+networks:
+  lab_net:
+    driver: bridge
+
+volumes:
+  dbservice-volume:

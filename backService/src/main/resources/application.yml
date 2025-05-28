@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: backService
+  datasource:
+    url: jdbc:postgresql://db:${DB_PORT}/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  kafka:
+    bootstrap-servers: kafka:9092, kafka:9093
+    consumer:
+      group-id: "main-group"
+      keyDeserializer: org.apache.kafka.common.serialization.StringDeserializer
+      valueDeserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+server:
+  port: ${BACK_PORT}
